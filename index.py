@@ -30,7 +30,7 @@ st.title("Heart Attack Predictor 🫀")
 # function if the user choose KNN model
 def knn_display(option):
     st.write("KNN has the accuracy of 0.785")
-    #df_pred = pd.DataFrame([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]])
+    df_pred = pd.DataFrame([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]])
     knn_cld_model = joblib.load("knn_clf.pkl")
     prediction = knn_cld_model.predict(df_pred)
 
@@ -128,6 +128,3 @@ elif option=="Gradient Boosting (GB)":
     gb_display(option)
 elif option=="Random Forest + Gradient Boosting Hybrid (RF-GB)":
     hybrid_display(option)
-
-
-df_pred = pd.DataFrame([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]])

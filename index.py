@@ -12,7 +12,7 @@ st.set_page_config(
     }
 )
 
-st.title("Heart Attack Predictor")
+st.title("Heart Attack Predictor 🫀")
 
 # function if the user choose KNN model
 def knn_display(option):

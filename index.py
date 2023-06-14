@@ -3,6 +3,19 @@ import joblib
 import pandas as pd
 import numpy as np
 
+#from st_pages import Page, add_page_title, show_pages
+
+## Declaring the pages in your app:"
+
+#show_pages(
+#    [
+#        Page("index.py", "Home", "🫀"),
+#        # Can use :<icon-name>: or the actual icon
+#        Page("example_app/example_one.py", "Example One", ":books:"),
+#        # The pages appear in the order you pass them
+#    ]
+#)
+
 st.set_page_config(
     page_title="Ada masa for Heart Attack?",
     layout="wide",
@@ -17,7 +30,7 @@ st.title("Heart Attack Predictor 🫀")
 # function if the user choose KNN model
 def knn_display(option):
     st.write("KNN has the accuracy of 0.785")
-    df_pred = pd.DataFrame([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]])
+    #df_pred = pd.DataFrame([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]])
     knn_cld_model = joblib.load("knn_clf.pkl")
     prediction = knn_cld_model.predict(df_pred)
 
@@ -83,7 +96,7 @@ def hybrid_display(option):
             st.write("You should seek the doctor, potential heart problem")
         else:
             st.write("You're fine insyaAllah")
-
+            
 st.divider()
 
 # User inputs
@@ -99,11 +112,11 @@ exang = st.radio("Exercise Induced Angina (0-No, 1-Yes)", (0, 1))
 oldpeak = st.slider("ST Depression Induced by Exercise Relative to Rest",0.0,6.2)
 slope = st.radio("Slope of the Peak Exercise ST Segment (0-Upsloping, 1-Flat, 2-Downsloping)", (0, 1, 2))
 ca = st.radio("Number of Major Vessels (0-3) Colored by Fluoroscopy", (0, 1, 2, 3))
-thal = st.radio("Thalassemia (1-Normal, 2-Fixed Defect, 3-Reversible Defect)", (1, 2, 3))
+thal = st.radio("Thalassemia (0-Normal, 1-Fixed Defect, 2-Reversible Defect)", (0, 1, 2))
 
 st.divider()
 
-option = st.selectbox("Which model do you want to use?", ("K-Nearest Neighbor (KNN)","Support Vector Machine (SVM)","Random Forest (RF)","Gradient Boosting (GB)","RF-GB Hybrid"))
+option = st.selectbox("Which model do you want to use?", ("K-Nearest Neighbor (KNN)","Support Vector Machine (SVM)","Random Forest (RF)","Gradient Boosting (GB)","Random Forest + Gradient Boosting Hybrid (RF-GB)"))
 
 if option=="K-Nearest Neighbor (KNN)":
     knn_display(option)
@@ -115,3 +128,6 @@ elif option=="Gradient Boosting (GB)":
     gb_display(option)
 elif option=="Random Forest + Gradient Boosting Hybrid (RF-GB)":
     hybrid_display(option)
+
+
+df_pred = pd.DataFrame([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]])

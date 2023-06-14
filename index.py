@@ -85,7 +85,7 @@ exang = st.radio("Exercise Induced Angina (0-No, 1-Yes)", (0, 1))
 oldpeak = st.slider("ST Depression Induced by Exercise Relative to Rest",0.0,6.2)
 slope = st.radio("Slope of the Peak Exercise ST Segment (0-Upsloping, 1-Flat, 2-Downsloping)", (0, 1, 2))
 ca = st.radio("Number of Major Vessels (0-3) Colored by Fluoroscopy", (0, 1, 2, 3))
-thal = st.radio("Thalassemia (0-Normal, 1-Fixed Defect, 2-Reversible Defect)", (0, 1, 2))
+thal = st.radio("Thalassemia (1-Normal, 2-Fixed Defect, 3-Reversible Defect)", (1, 2, 3))
 
 st.divider()
 

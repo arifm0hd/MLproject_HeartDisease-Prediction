@@ -69,7 +69,21 @@ def gb_display(option):
             st.write("You should seek the doctor, potential heart problem")
         else:
             st.write("You're fine insyaAllah")
-            
+
+# function if the user choose RF-GB model
+def hybrid_display(option):
+    st.write("RF-GB Hybrid has the accuracy of 0.951")
+    hybrid_clf_model = joblib.load("hybrid_clf.pkl")
+    df_pred = pd.DataFrame([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]])
+    prediction = hybrid_clf_model.predict(df_pred)
+
+    # Print the prediction
+    if st.button("Predict"):
+        if prediction == 1:
+            st.write("You should seek the doctor, potential heart problem")
+        else:
+            st.write("You're fine insyaAllah")
+
 st.divider()
 
 # User inputs
@@ -89,7 +103,7 @@ thal = st.radio("Thalassemia (1-Normal, 2-Fixed Defect, 3-Reversible Defect)", (
 
 st.divider()
 
-option = st.selectbox("Which model do you want to use?", ("K-Nearest Neighbor (KNN)","Support Vector Machine (SVM)","Random Forest (RF)","Gradient Boosting (GB)"))
+option = st.selectbox("Which model do you want to use?", ("K-Nearest Neighbor (KNN)","Support Vector Machine (SVM)","Random Forest (RF)","Gradient Boosting (GB)","RF-GB Hybrid"))
 
 if option=="K-Nearest Neighbor (KNN)":
     knn_display(option)
@@ -99,3 +113,5 @@ elif option=="Random Forest (RF)":
     rf_display(option)
 elif option=="Gradient Boosting (GB)":
     gb_display(option)
+elif option=="Random Forest + Gradient Boosting Hybrid (RF-GB)":
+    hybrid_display(option)
